@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, viewChild } from '@angular/core';
 import { IProducts } from '../shared/Models/Product';
 import { IPagniation } from '../shared/Models/Pagination';
 import { ShopService } from './service/shop.service';
@@ -9,15 +9,17 @@ import { ShopModule } from './shop.module';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ShopParams } from '../shared/Models/shopParams';
 import { SharedModule } from '../shared/shared.module';
+import { PagerComponent } from "../shared/component/pager/pager.component";
 
 @Component({
-  selector: 'app-shop',
-  standalone: true,
-  imports: [NgFor,NgIf, ShopItemsComponent,ShopModule,PaginationModule,SharedModule],
-  templateUrl: './shop.component.html',
-  styleUrl: './shop.component.css'
+    selector: 'app-shop',
+    standalone: true,
+    templateUrl: './shop.component.html',
+    styleUrl: './shop.component.css',
+    imports: [NgFor, NgIf, ShopItemsComponent, ShopModule, PaginationModule, SharedModule, PagerComponent]
 })
 export class ShopComponent implements OnInit {
+  @ViewChild('search') searchKey:ElementRef;
   products: IProducts[] = [];
   categories: ICategory[] = [];
   sortOptions=[
@@ -52,6 +54,7 @@ export class ShopComponent implements OnInit {
 
   onCategorySelected(categoryId:number){
     this.shopParams.categoryId = categoryId
+    this.shopParams.pageNumber=1
     this.getProduct();
 
   }
@@ -63,7 +66,20 @@ export class ShopComponent implements OnInit {
   }
 
   onPageChanged(event:any){
-    this.shopParams.pageNumber = event;
+    if(this.shopParams.pageNumber !== event){
+      this.shopParams.pageNumber = event;
+      this.getProduct();
+    }
+  }
+
+  onSearch(){
+    this.shopParams.searhKey = this.searchKey.nativeElement.value
     this.getProduct();
   }
+  onReset(){
+    this.searchKey.nativeElement.value=''
+    this.shopParams  = new ShopParams()
+    this.getProduct()
+  }
+  
 }

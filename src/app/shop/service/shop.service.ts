@@ -22,6 +22,9 @@ export class ShopService {
     if(shopParams.categoryId !=0){
      params = params.append('categoryId',shopParams.categoryId.toString());
     }
+    if(shopParams.searhKey){
+      params = params.append('search',shopParams.searhKey);    
+    }
       params = params.append('sort',shopParams.sort);    
     params=params.append('pageNumber',shopParams.pageNumber.toString())
     params=params.append('pageSize',shopParams.pageSize.toString())

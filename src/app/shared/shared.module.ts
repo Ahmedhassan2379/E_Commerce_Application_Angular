@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { PagerComponent, PaginationModule } from 'ngx-bootstrap/pagination';
 import { PagingHeaderComponent } from './component/paging-header/paging-header.component';
 
 
@@ -11,6 +11,6 @@ import { PagingHeaderComponent } from './component/paging-header/paging-header.c
     PagingHeaderComponent,
     PaginationModule.forRoot()
   ],
-  exports:[PaginationModule,PagingHeaderComponent]
+  exports:[PaginationModule,PagingHeaderComponent,PagerComponent]
 })
 export class SharedModule { }
