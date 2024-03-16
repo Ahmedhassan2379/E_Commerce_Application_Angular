@@ -2,7 +2,7 @@
     <img src="{{product.productPicture}}" alt="Image">
     <div class="card-body">
         <div class="">
-            <a href="#">
+            <a routerLink="/shop/{{product.id}}">
                 <p class="text-uppercase">{{product.name}}</p>
             </a>
             <div>{{product.price }}</div>
@@ -14,7 +14,7 @@
                 <button type="button" class="btn btn-sm btn-outline-danger" style="width: 50%"><i
                         class="fa fa-shopping-cart" aria-hidden="true"></i>
                 </button>
-                <button type="button" class="btn btn-sm btn-outline-primary">view</button>
+                <button type="button" class="btn btn-sm btn-outline-primary" routerLink="/shop/{{product.id}}" routerLinkActive="router-link-active" >view</button>
             </div>
         </div>
     </div>

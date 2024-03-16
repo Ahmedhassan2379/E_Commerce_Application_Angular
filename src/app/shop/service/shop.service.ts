@@ -38,4 +38,8 @@ export class ShopService {
    getCategory(){
     return this.http.get<ICategory[]>(this.baseUrl+"Category/allcategory")
    }
+
+   getProductById(id:number){
+    return this.http.get<IProducts>(this.baseUrl+'Product/get-product-by-id/'+id)
+   }
 }
